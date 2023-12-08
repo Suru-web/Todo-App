@@ -1,0 +1,74 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ToDo" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="colorPrimary">@color/dark_sky_blue</item>
+        <item name="colorPrimaryDark">@color/very_dark_sky_blue</item>
+        <item name="colorAccent">@color/very_dark_sky_blue</item>
+    </style>
+    <style name="APP_SCREEN_COLOR">
+        <item name="android:background">@color/dark</item>
+    </style>
+    <style name="TEXT_COLOR">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="EDIT_TEXT_STYLE">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/silver</item>
+    </style>
+    <style name="SIGN_IN_UP_BUTTON">
+        <item name="android:background">@drawable/button_round_white</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+    <style name="DIVIDER_COLOR">
+        <item name="android:background">@color/dark</item>
+    </style>
+    <style name="GOOGLE_LOGIN_BUTTON">
+        <item name="android:background">@drawable/button_round_dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/black</item>
+    </style>
+    <style name="TEXTINPUTLAYOUT">
+        <item name="boxBackgroundColor">@color/dark</item>
+        <item name="helperTextTextColor">@color/red</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="cursorColor">@color/white</item>
+        <item name="android:textSize">@dimen/dp18</item>
+        <item name="android:state_focused">true</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+    </style>
+    <style name="LIST_COLORING">
+        <item name="cardBackgroundColor">@color/light_dark</item>
+        <item name="cardCornerRadius">@dimen/dp20</item>
+        <item name="rippleColor">@color/dark</item>
+        <item name="elevation">@dimen/dp1</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardElevation">@dimen/dp16</item>
+    </style>
+    <style name="FAB_STYLE">
+        <item name="android:backgroundTint">@color/dark_sky_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="VIEW_LIST_STYLE">
+        <item name="android:background">@color/very_dark_sky_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="RELATIVE_LAYOUT_LIST_ITEM_VIEW">
+        <item name="android:background">@drawable/relative_layout_background_dark</item>
+    </style>
+    <style name="FAB_BACKGROUND">
+        <item name="android:backgroundTint">@color/very_dark_sky_blue</item>
+        <item name="fabCradleRoundedCornerRadius">@dimen/dp100</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:iconTint" tools:ignore="NewApi">@color/super_white</item>
+    </style>
+    <style name="CHECKBOX_TEXT">
+        <item name="android:textColor">@color/very_dark_sky_blue</item>
+    </style>
+</resources>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/VIEW_LIST_STYLE"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
+    tools:context=".category_list_view">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp20"
+            android:padding="@dimen/dp20"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:id="@+id/backButton"
+                style="@style/VIEW_LIST_STYLE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/back"
+                android:textSize="@dimen/dp16"
+                tools:ignore="RelativeOverlap,SpUsage,TextSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:layout_width="@dimen/dp22"
+                android:layout_height="@dimen/dp22"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:background="@null"
+                android:contentDescription="@string/menu_button"
+                android:padding="@dimen/dp4"
+                android:scaleType="centerCrop"
+                android:src="@drawable/menu"
+                tools:ignore="TouchTargetSizeCheck,RedundantDescriptionCheck" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/categoryShow"
+            style="@style/VIEW_LIST_STYLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp20"
+            android:paddingEnd="0dp"
+            android:text="@string/category"
+            android:textSize="@dimen/dp28"
+            android:textStyle="bold"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/taskCountShow"
+            style="@style/VIEW_LIST_STYLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp20"
+            android:paddingEnd="0dp"
+            android:text="@string/count"
+            android:textSize="@dimen/dp22"
+            tools:ignore="SpUsage,TextSizeCheck" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        style="@style/RELATIVE_LAYOUT_LIST_ITEM_VIEW"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_weight="4">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_view_recycler"
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/dp20"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addTaskListViewActivity"
+            style="@style/FAB_BACKGROUND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginEnd="@dimen/dp30"
+            android:layout_marginBottom="@dimen/dp30"
+            android:contentDescription="@string/add_task"
+            android:src="@android:drawable/ic_input_add"
+            app:shapeAppearance="@style/FAB_BACKGROUND" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/deleteTask"
+            style="@style/FAB_BACKGROUND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp30"
+            android:contentDescription="@string/add_task"
+            android:text="@string/delete_task"
+            android:visibility="gone"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:shapeAppearance="@style/FAB_BACKGROUND" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

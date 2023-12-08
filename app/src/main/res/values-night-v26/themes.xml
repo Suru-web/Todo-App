@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="FAB_BACKGROUND">
+        <item name="android:backgroundTint">@color/very_dark_sky_blue</item>
+        <item name="fabCradleRoundedCornerRadius">@dimen/dp100</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:iconTint">@color/super_white</item>
+    </style>
+</resources>
