@@ -4,17 +4,20 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.suraj.todo.Adapters.ImageAdapter;
 import com.suraj.todo.Adapters.main_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.suraj.todo.objects.main_list;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<main_list> homeList = new ArrayList<>();
     ArrayList<main_list> musicList = new ArrayList<>();
     String authID;
-
+    Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,27 @@ public class MainActivity extends AppCompatActivity {
         setNameUser();
         setFabColor();
 
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        ImageAdapter adapterImage = new ImageAdapter(this);
+        viewPager.setAdapter(adapterImage);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                saveCurrentImagePosition(position);
+                setFabColor();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        int savedPosition = getSavedImagePosition();
+        viewPager.setCurrentItem(savedPosition);
+
         main_adapter adapter = new main_adapter(binding.getRoot().getContext(), combinedList);
         binding.notesListRecycler.setAdapter(adapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(binding.getRoot().getContext(), 2);
@@ -70,6 +94,16 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
         getValuePutToAdapter(adapter);
+    }
+    private void saveCurrentImagePosition(int position) {
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("imagePosition", position);
+        editor.apply();
+    }
+    private int getSavedImagePosition() {
+        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        return preferences.getInt("imagePosition", 0);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -350,8 +384,28 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     protected void setFabColor() {
-        @SuppressLint("UseCompatLoadingForDrawables") Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.male1)).getBitmap();
+        @SuppressLint("UseCompatLoadingForDrawables")
+        int position = getSavedImagePosition();
+        if (position==0){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.male1)).getBitmap();
+        } else if (position==1){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.female1)).getBitmap();
+        } else if (position==7){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.female4)).getBitmap();
+        } else if (position==2){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.male2)).getBitmap();
+        } else if (position==3){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.female2)).getBitmap();
+        } else if (position==4){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.male3)).getBitmap();
+        } else if (position==5){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.female3)).getBitmap();
+        } else if (position==6){
+            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.male4)).getBitmap();
+        }
+
         Palette.from(bitmap).generate(palette -> {
             // Get the dominant color
             assert palette != null;

@@ -27,17 +27,30 @@
             android:layout_marginStart="@dimen/dp20"
             android:text="@string/hello_there_name"
             android:textSize="30sp"
-            tools:ignore="SpUsage" />
+            tools:ignore="RelativeOverlap,SpUsage" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileIcon"
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/profileIcon"-->
+<!--            android:layout_width="@dimen/dp60"-->
+<!--            android:layout_height="@dimen/dp60"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="@dimen/dp20"-->
+<!--            android:src="@drawable/male1" />-->
+        <RelativeLayout
             android:layout_width="@dimen/dp60"
             android:layout_height="@dimen/dp60"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/dp48"
             android:layout_marginEnd="@dimen/dp20"
-            android:src="@drawable/male1" />
+            tools:context=".MainActivity">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -43,4 +43,5 @@
     <string name="completed">Completed</string>
     <string name="delete_task">Delete Task</string>
     <string name="privateTask">Private</string>
+    <string name="profileimage">ProfileImage</string>
 </resources>
