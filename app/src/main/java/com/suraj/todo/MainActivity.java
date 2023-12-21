@@ -16,12 +16,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.suraj.todo.objects.main_list;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<main_list> musicList = new ArrayList<>();
     String authID;
     Bitmap bitmap;
+    Vibrator vibrator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         setNameUser();
         setFabColor();
+        vibrator  = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         ImageAdapter adapterImage = new ImageAdapter(this);
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                vibrator.vibrate(10);
             }
 
             @Override

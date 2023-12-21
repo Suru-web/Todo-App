@@ -44,4 +44,8 @@
     <string name="delete_task">Delete Task</string>
     <string name="privateTask">Private</string>
     <string name="profileimage">ProfileImage</string>
+    <string name="see_note">See Note</string>
+    <string name="hide_note">Hide note</string>
+    <string name="sort_by_created_date">Sort by create date</string>
+    <string name="sort_by_due_time">Sort by Due Time</string>
 </resources>

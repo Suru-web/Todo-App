@@ -13,7 +13,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -78,8 +78,7 @@
         style="@style/RELATIVE_LAYOUT_LIST_ITEM_VIEW"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp30"
-        android:layout_weight="4">
+        android:layout_weight="3.8">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_view_recycler"

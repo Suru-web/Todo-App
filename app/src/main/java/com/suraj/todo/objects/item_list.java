@@ -1,5 +1,7 @@
 package com.suraj.todo.objects;
 
+import java.util.Date;
+
 public class item_list {
     String task;
     int date;
@@ -8,12 +10,13 @@ public class item_list {
     boolean completed;
     String docID;
     String categ;
+    private Date creationTimestamp;
 
     public item_list() {
 
     }
 
-    public item_list(String task, int date, int month, int year, boolean completed, String docID, String categ) {
+    public item_list(String task, int date, int month, int year, boolean completed, String docID, String categ, Date creationTimestamp) {
         this.task = task;
         this.date = date;
         this.month = month;
@@ -21,6 +24,15 @@ public class item_list {
         this.completed = completed;
         this.docID = docID;
         this.categ = categ;
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public Date getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(Date creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
     }
 
     public String getCateg() {

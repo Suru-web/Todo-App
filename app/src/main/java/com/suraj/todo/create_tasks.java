@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.suraj.todo.databinding.ActivityCreateTasksBinding;
@@ -30,10 +33,11 @@ import java.util.Objects;
 public class create_tasks extends AppCompatActivity implements View.OnClickListener {
     private ActivityCreateTasksBinding binding;
     int date, month, yearDB;
-    String task, note, category;
+    String task, category;
     FirebaseFirestore fb = FirebaseFirestore.getInstance();
     String authID = FirebaseAuth.getInstance().getUid();
     String receivedCategory = null;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
         checkUiMode();
         setDateAndTime();
         checkTextChange();
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         Intent intent = getIntent();
         receivedCategory = intent.getStringExtra("category");
@@ -72,10 +77,6 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
                     currentYear, currentMonth, currentDay);
             datePickerDialog.show();
         });
-        binding.addNote.setOnClickListener(v -> {
-            binding.addNoteCardView.setVisibility(View.VISIBLE);
-            binding.extraNote.requestFocus();
-        });
         binding.category.setOnClickListener(v -> {
             InputMethodManager imm = (InputMethodManager) create_tasks.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -83,8 +84,8 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
             binding.addCategoryCardView.setVisibility(View.VISIBLE);
         });
         binding.createButton.setOnClickListener(v -> {
+            vibrator.vibrate(10);
             task = Objects.requireNonNull(binding.textInputLayoutEnterTask.getEditText()).getText().toString();
-            note = binding.extraNote.getText().toString();
             if (date == 0 || month == 0 || yearDB == 0){
                 binding.datePickerTVError.setVisibility(View.VISIBLE);
                 return;
@@ -96,16 +97,15 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
                 binding.textInputLayoutEnterTask.setHelperText(getString(R.string.task_cannot_be_empty));
                 return;
             }
-            String id = fb.collection("users").document(authID).collection(category).document().getId();
-            System.out.println("Printing the id :"+id);
+            Timestamp timestamp = Timestamp.now();
             Map<String, Object> data = new HashMap<>();
             data.put("task", task);
             data.put("date", date);
             data.put("month", month);
             data.put("year", yearDB);
-            data.put("notes", note);
             data.put("category", category);
             data.put("completed",false);
+            data.put("timeStamp",timestamp);
             fb.collection("users").document(authID).collection(category).add(data)
                     .addOnSuccessListener(documentReference -> {
                         Intent intent1 = new Intent(create_tasks.this, MainActivity.class);

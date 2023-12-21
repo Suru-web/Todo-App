@@ -53,7 +53,18 @@
                 android:layout_height="@dimen/dp30"
                 android:gravity="center"
                 android:text="@string/date"
-                android:textSize="@dimen/dp14"
+                android:textSize="@dimen/dp13"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/taskNote"
+                style="@style/TEXT_COLOR"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp15"
+                android:gravity="center"
+                android:text="@string/see_note"
+                android:visibility="gone"
+                android:textSize="@dimen/dp12"
                 tools:ignore="SpUsage" />
 
         </LinearLayout>

@@ -72,5 +72,8 @@
     <style name="COMPLETED_TASK">
         <item name="android:textColor">@color/green</item>
     </style>
+    <style name="DIVIDER_COLOR">
+        <item name="android:backgroundTint">@color/light_silver</item>
+    </style>
 
 </resources>

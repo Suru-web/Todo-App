@@ -121,31 +121,6 @@
                 tools:ignore="SpUsage" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/dp20"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/dp36"
-                android:layout_height="@dimen/dp36"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/dp20"
-                android:padding="@dimen/dp10"
-                android:src="@drawable/notebook" />
-
-            <TextView
-                android:id="@+id/addNote"
-                style="@style/TEXT_COLOR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/add_note"
-                android:textSize="@dimen/dp14"
-                tools:ignore="SpUsage" />
-        </LinearLayout>
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/addNoteCardView"
             android:layout_width="match_parent"
@@ -198,19 +173,19 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/addCategoryCardView"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp72"
+            android:layout_height="@dimen/dp75"
             android:layout_marginStart="@dimen/dp20"
             android:layout_marginTop="@dimen/dp20"
             android:layout_marginEnd="@dimen/dp20"
             android:visibility="visible"
             android:focusable="true"
-            android:minHeight="@dimen/dp36"
+            android:minHeight="@dimen/dp72"
             app:cardCornerRadius="@dimen/dp16"
             app:strokeColor="@color/iron">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="@dimen/dp10">
 
                 <LinearLayout
@@ -220,7 +195,7 @@
 
                     <LinearLayout
                         android:id="@+id/allTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -249,7 +224,7 @@
 
                     <LinearLayout
                         android:id="@+id/privateTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -278,7 +253,7 @@
 
                     <LinearLayout
                         android:id="@+id/workTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -307,7 +282,7 @@
 
                     <LinearLayout
                         android:id="@+id/shoppingTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -336,7 +311,7 @@
 
                     <LinearLayout
                         android:id="@+id/tripTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -365,7 +340,7 @@
 
                     <LinearLayout
                         android:id="@+id/studyTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -394,7 +369,7 @@
 
                     <LinearLayout
                         android:id="@+id/homeTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
@@ -423,7 +398,7 @@
 
                     <LinearLayout
                         android:id="@+id/musicTask"
-                        android:layout_width="@dimen/dp60"
+                        android:layout_width="@dimen/dp65"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="vertical">
