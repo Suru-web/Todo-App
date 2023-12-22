@@ -1,5 +1,6 @@
 package com.suraj.todo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -17,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +40,15 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
     String authID = FirebaseAuth.getInstance().getUid();
     String receivedCategory = null;
     Vibrator vibrator;
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(create_tasks.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,4 +221,6 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
         }
         binding.category.setText(category);
     }
+
+
 }

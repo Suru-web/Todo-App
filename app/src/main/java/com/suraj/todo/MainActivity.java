@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                vibrator.vibrate(10);
             }
 
             @Override
             public void onPageSelected(int position) {
                 saveCurrentImagePosition(position);
+                vibrator.vibrate(5);
                 setFabColor();
             }
 

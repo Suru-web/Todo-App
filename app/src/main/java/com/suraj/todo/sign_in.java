@@ -40,7 +40,11 @@ public class sign_in extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        checkLoggedIn();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            startActivity(new Intent(sign_in.this, MainActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -53,8 +57,6 @@ public class sign_in extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        checkLoggedIn();
-
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_id))
@@ -132,13 +134,6 @@ public class sign_in extends AppCompatActivity {
             } catch (ApiException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private void checkLoggedIn() {
-        if (user != null) {
-            startActivity(new Intent(sign_in.this, MainActivity.class));
-            finish();
         }
     }
 
