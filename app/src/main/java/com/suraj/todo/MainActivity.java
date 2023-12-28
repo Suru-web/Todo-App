@@ -8,20 +8,29 @@ import com.suraj.todo.Adapters.ImageAdapter;
 import com.suraj.todo.Adapters.main_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.suraj.todo.objects.main_list;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -35,6 +44,7 @@ import com.suraj.todo.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     String authID;
     Bitmap bitmap;
     Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +77,13 @@ public class MainActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         setNameUser();
         setFabColor();
-        vibrator  = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        PeriodicWorkRequest periodicWorkRequest =
+                new PeriodicWorkRequest.Builder(DueDateWorker.class, 24, TimeUnit.SECONDS)
+                        .build();
+
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         ImageAdapter adapterImage = new ImageAdapter(this);
@@ -87,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+
+
         int savedPosition = getSavedImagePosition();
         viewPager.setCurrentItem(savedPosition);
 

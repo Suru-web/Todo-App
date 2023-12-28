@@ -40,6 +40,7 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
     String authID = FirebaseAuth.getInstance().getUid();
     String receivedCategory = null;
     Vibrator vibrator;
+    int d,y,m;
 
 
     @Override
@@ -98,8 +99,10 @@ public class create_tasks extends AppCompatActivity implements View.OnClickListe
             vibrator.vibrate(10);
             task = Objects.requireNonNull(binding.textInputLayoutEnterTask.getEditText()).getText().toString();
             if (date == 0 || month == 0 || yearDB == 0){
-                binding.datePickerTVError.setVisibility(View.VISIBLE);
-                return;
+                final Calendar c = Calendar.getInstance();
+                yearDB = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                date = c.get(Calendar.DAY_OF_MONTH);
             }
             if (category == null) {
                 category = "All";
