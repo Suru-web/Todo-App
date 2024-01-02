@@ -21,10 +21,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.suraj.todo.Adapters.main_adapter;
 import com.suraj.todo.Adapters.sub_list_adapter;
 import com.suraj.todo.objects.item_list;
 
 import com.suraj.todo.databinding.ActivityCategoryListViewBinding;
+import com.suraj.todo.objects.main_list;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +41,7 @@ public class category_list_view extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     TextView sortDueDate, sortCreateTime;
+    final ArrayList<main_list> combinedList = new ArrayList<>();
 
     @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
@@ -112,6 +115,43 @@ public class category_list_view extends AppCompatActivity {
                     }
                 });
 
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    private void getValuePutToAdapter(main_adapter adapter) {
+        firestore.collection("users").document(authID).collection("All")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        combinedList.clear();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            main_list mainList = document.toObject(main_list.class);
+                            mainList.setTaskCount(mainList.getTaskCount() + 1);
+                            if (combinedList.isEmpty()) {
+                                combinedList.add(mainList);
+                            } else {
+                                boolean categoryExists = false;
+                                for (main_list listItem : combinedList) {
+                                    if (listItem.getCategory().equals(mainList.getCategory())) {
+                                        binding.taskCountShow.setText((listItem.getTaskCount() + 1));
+                                        categoryExists = true;
+                                        break;
+                                    }
+                                }
+                                if (!categoryExists) {
+                                    combinedList.add(mainList);
+                                }
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                        // Instead of directly adding items to combinedList, use synchronized block
+                        synchronized (combinedList) {
+                            combinedList.addAll(combinedList);
+                        }
+
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
     }
 
     @SuppressLint("NotifyDataSetChanged")

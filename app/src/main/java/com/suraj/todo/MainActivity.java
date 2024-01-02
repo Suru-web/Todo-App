@@ -8,9 +8,6 @@ import com.suraj.todo.Adapters.ImageAdapter;
 import com.suraj.todo.Adapters.main_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,16 +18,12 @@ import androidx.work.WorkManager;
 import com.suraj.todo.objects.main_list;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -63,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
     String authID;
     Bitmap bitmap;
     Vibrator vibrator;
+    main_adapter adapter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        combinedList.clear();
+        getValuePutToAdapter(adapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
         setFabColor();
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        PeriodicWorkRequest periodicWorkRequest =
-                new PeriodicWorkRequest.Builder(DueDateWorker.class, 24, TimeUnit.SECONDS)
-                        .build();
-
-        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         ImageAdapter adapterImage = new ImageAdapter(this);
@@ -96,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 saveCurrentImagePosition(position);
-                vibrator.vibrate(5);
+                vibrator.vibrate(10);
                 setFabColor();
             }
 
@@ -109,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         int savedPosition = getSavedImagePosition();
         viewPager.setCurrentItem(savedPosition);
 
-        main_adapter adapter = new main_adapter(binding.getRoot().getContext(), combinedList);
+        adapter = new main_adapter(binding.getRoot().getContext(), combinedList);
         binding.notesListRecycler.setAdapter(adapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(binding.getRoot().getContext(), 2);
         binding.notesListRecycler.setLayoutManager(gridLayoutManager);
@@ -117,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, create_tasks.class));
             finish();
         });
-        getValuePutToAdapter(adapter);
     }
     private void saveCurrentImagePosition(int position) {
         SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
